@@ -19,18 +19,10 @@
   
   <%= f.text_field :phone_number, placeholder: @user.phone_number %><br>
 
-    <%= f.label :disposition %>
     <%= f.select(:disposition, [['New Lead'], ['Recording Pending'], ['Bad State'], ['Doctor Approval Pending'], ['Script Received Signed'], ['Dr Denied'], ['Transferred to DR - Success'], ['Transferred to DR - Missing Information'], ['QA Approved'], ['QA Rejected']], prompt: @user.disposition) %><br />
  
-  
-
-  
-    <%= f.label :status %>
     <%= f.select(:status, [['Inactive'], ['Activate'], ['Problem'], ['Reject']], prompt: @user.status) %><br />
   
-
-  
-    <%= f.label :center_code %>
     <%= f.number_field :center_code, placeholder: @user.center_code %><br />
   <%= f.submit "Edit Lead" %>
 <% end %>
