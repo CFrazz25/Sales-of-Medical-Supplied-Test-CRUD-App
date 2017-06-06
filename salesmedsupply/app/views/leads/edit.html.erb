@@ -1,0 +1,44 @@
+<center style="padding-top: 70px;">
+<% if logged_in? && current_admin.admin == true %>
+<h2>Edit Lead</h2>
+
+<% if @errors %>
+   <div class="error_container">
+       <p><strong> There is a problem</strong></p>
+       <% @errors.each do |error| %>
+         <p><%= error %></p>
+       <% end %>
+   </div>
+<% end %>
+
+<%= bootstrap_form_for @user, url: {action: "update"} do |f| %>
+  
+  <%= f.text_field :first_name, placeholder: @user.first_name %><br>
+  
+  <%= f.text_field :last_name, placeholder: @user.last_name %><br>
+  
+  <%= f.text_field :phone_number, placeholder: @user.phone_number %><br>
+
+    <%= f.label :disposition %>
+    <%= f.select(:disposition, [['New Lead'], ['Recording Pending'], ['Bad State'], ['Doctor Approval Pending'], ['Script Received Signed'], ['Dr Denied'], ['Transferred to DR - Success'], ['Transferred to DR - Missing Information'], ['QA Approved'], ['QA Rejected']], prompt: @user.disposition) %><br />
+ 
+  
+
+  
+    <%= f.label :status %>
+    <%= f.select(:status, [['Inactive'], ['Activate'], ['Problem'], ['Reject']], prompt: @user.status) %><br />
+  
+
+  
+    <%= f.label :center_code %>
+    <%= f.number_field :center_code, placeholder: @user.center_code %><br />
+  <%= f.submit "Edit Lead" %>
+<% end %>
+<% else %>
+<h1> You don't have access to this page! </h1>
+
+<% end %>
+</center>
+
+
+

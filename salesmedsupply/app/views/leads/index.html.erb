@@ -1,0 +1,32 @@
+<div style="padding-top: 70px;">
+<% if logged_in? && current_admin.admin == true %>
+<% @leads.each do |lead| %>
+<ul>
+  <li>First Name: <%= lead.first_name %></li>
+  <li>Last Name: <%= lead.last_name %></li>
+  <li>Phone Number: <%= lead.phone_number %></li>
+  <li>Disposition: <%= lead.disposition %></li>
+  <li>Status: <%= lead.status %></li>
+  <li>Center Code: <%= lead.center_code %></li>
+  <li ><%= link_to "edit lead", edit_lead_path(lead.id), class: "btn-success btn-sm" %></li><br>
+  </ul>
+<% end %>
+<% end %>
+
+<% if logged_in? && current_vendor.admin == false %>
+<% @leads.each do |lead| %>
+  <% if current_vendor.center_code == lead.center_code %>
+  <ul>
+  <li>First Name: <%= lead.first_name %></li>
+  <li>Last Name: <%= lead.last_name %></li>
+  <li>Phone Number: <%= lead.phone_number %></li>
+  <li>Disposition: <%= lead.disposition %></li>
+  <li>Status: <%= lead.status %></li>
+  <li>Center Code: <%= lead.center_code %></li>
+  </ul>
+  <% end %>
+ 
+<% end %>
+
+<% end %>
+</div>

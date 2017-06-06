@@ -1,0 +1,28 @@
+<center style="padding-top: 70px;"><h2>Admin Sign Up</h2>
+
+<% if @errors %>
+   <div class="error_container">
+       <p><strong> There is a problem</strong></p>
+       <% @errors.each do |error| %>
+         <p><%= error %></p>
+       <% end %>
+   </div>
+<% end %>
+
+<%= bootstrap_form_for :user, url: {action: "create"} do |f| %>
+  
+  <%= f.text_field :first_name, placeholder: "First Name" %><br>
+  
+  <%= f.text_field :last_name, placeholder: "Last Name" %><br>
+  
+  <%= f.email_field :email, placeholder: "Email" %><br>
+
+  <%= f.hidden_field(:admin, {value: true}) %><br>
+  
+  <%= f.password_field :password, placeholder: "Password" %><br>
+
+  <%= f.label :secret_key, "(Ask Admin Manager for Key to Create Admin Account)" %>
+  <%= f.password_field :secret_key %><br>
+  <%= f.submit "Sign Up" %>
+<% end %>
+</center>

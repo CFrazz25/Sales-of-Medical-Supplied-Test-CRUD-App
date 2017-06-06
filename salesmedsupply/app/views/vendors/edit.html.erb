@@ -1,0 +1,31 @@
+<center style="padding-top: 70px;">
+<% if logged_in? && current_admin.admin == true %>
+<h2>Edit Vendor</h2>
+
+<% if @errors %>
+   <div class="error_container">
+       <p><strong> There is a problem</strong></p>
+       <% @errors.each do |error| %>
+         <p><%= error %></p>
+       <% end %>
+   </div>
+<% end %>
+
+<%= bootstrap_form_for @user, url: {action: "update"} do |f| %>
+  
+  <%= f.text_field :first_name, placeholder: @user.first_name %><br>
+  
+  <%= f.text_field :last_name, placeholder: @user.last_name %><br>
+  
+  <%= f.email_field :email, placeholder: @user.email %><br>
+
+  <%= f.hidden_field(:admin, {value: false}) %><br>
+  <%= f.hidden_field(:password, {value: @user.password}) %><br>
+
+  <%= f.number_field :center_code, placeholder: @user.center_code %><br>
+  <%= f.submit "Edit Vendor" %>
+<% end %>
+<% else %>
+<h1> You don't have access to this page! </h1>
+<% end %>
+</center>

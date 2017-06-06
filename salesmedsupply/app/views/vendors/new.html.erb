@@ -1,0 +1,33 @@
+<center style="padding-top: 70px;">
+<% if logged_in? && current_admin.admin == true %>
+<h2>Create Vendor</h2>
+
+<% if @errors %>
+   <div class="error_container">
+       <p><strong> There is a problem</strong></p>
+       <% @errors.each do |error| %>
+         <p><%= error %></p>
+       <% end %>
+   </div>
+<% end %>
+
+<%= bootstrap_form_for :user, url: {action: "create"} do |f| %>
+  
+  <%= f.text_field :first_name, placeholder: "First Name" %><br>
+  
+  <%= f.text_field :last_name, placeholder: "Last Name" %><br>
+  
+  <%= f.email_field :email, placeholder: "Email" %><br>
+
+  <%= f.hidden_field(:admin, {value: false}) %><br>
+  
+  <%= f.password_field :password, placeholder: "Password" %><br>
+
+  <%= f.number_field :center_code, placeholder: "Center Code" %><br>
+  <%= f.submit "Create Vendor" %>
+<% end %>
+<% else %>
+<h1> You don't have access to this page! </h1>
+
+<% end %>
+</center>

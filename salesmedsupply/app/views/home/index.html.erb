@@ -1,0 +1,18 @@
+<center style="padding-top: 70px;">
+<h1>Welcome to Chris's Meds!</h1>
+<% if !logged_in? %>
+<p>Login or Sign Up to get started!</p>
+<% end %>
+<% if logged_in? && current_vendor.admin == false %>
+  <h3> Welcome back, <%= current_vendor.first_name %> </h3>
+   <%= link_to 'Create New Lead', new_lead_path %></p>
+   <%= link_to 'View your own Leads', leads_path %></p>
+<% end %>
+
+<% if logged_in? && current_admin.admin == true %>
+<h3> Welcome back, <%= current_admin.first_name %> </h3>
+   <%= link_to 'Create Vendor', new_vendor_path %></p>
+   <%= link_to 'View Vendors', vendors_path %></p>
+   <%= link_to 'View all Leads', leads_path %></p>
+<% end %>
+</center>

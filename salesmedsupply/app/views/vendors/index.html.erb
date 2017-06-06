@@ -1,0 +1,16 @@
+<div style="padding-top: 70px;">
+<% if logged_in? && current_admin.admin == true %>
+<h2>View Vendors! </h2>
+<% @vendors.each do |vendor| %>
+<ul>
+  <li>First Name: <%= vendor.first_name %></li>
+  <li>Last Name: <%= vendor.last_name %></li>
+  <li>Email: <%= vendor.email %></li>
+  <li>Center Code: <%= vendor.center_code %></li>
+  <li ><%= link_to "edit vendor", edit_vendor_path(vendor.id), class: "btn-success btn-sm" %></li><br>
+  </ul>
+<% end %>
+<% else %>
+<h1> You don't have access to this page! </h1>
+<% end %>
+</div>

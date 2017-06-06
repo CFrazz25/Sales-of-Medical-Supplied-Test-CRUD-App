@@ -1,0 +1,34 @@
+<center style="padding-top: 70px;">
+<% if logged_in? && current_vendor.admin == false %>
+<h2>Create Lead. Your center code is: <%= current_vendor.center_code %>/</h2>
+<% if @errors %>
+     <div class="error_container">
+         <p><strong> There is a problem</strong></p>
+         <% @errors.each do |error| %>
+           <p><%= error %></p>
+         <% end %>
+     </div>
+  <% end %>
+<%= bootstrap_form_for :lead, url: {action: "create"} do |f| %>
+
+    <%= f.text_field :first_name, autofocus: true %><br />
+
+    <%= f.text_field :last_name, autofocus: true %><br />
+  
+    <%= f.text_field :phone_number, autofocus: true %><br />
+ 
+    <%= f.select(:disposition, [['New Lead'], ['Recording Pending'], ['Bad State'], ['Doctor Approval Pending'], ['Script Received Signed'], ['Dr Denied'], ['Transferred to DR - Success'], ['Transferred to DR - Missing Information'], ['QA Approved'], ['QA Rejected']]) %><br />
+ 
+    <%= f.select(:status, [['Inactive'], ['Activate'], ['Problem'], ['Reject']]) %><br />
+
+    <%= f.number_field :center_code, autofocus: true %><br />
+  
+  <%= f.submit "Create New Lead" %>
+<% end %>
+<% else %>
+<h1> You don't have access to this page! </h1>
+<% end %>
+</center>
+
+
+
