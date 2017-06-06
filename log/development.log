@@ -6797,3 +6797,24 @@ Processing by HomeController#index as HTML
 Completed 200 OK in 48ms (Views: 41.6ms | ActiveRecord: 0.0ms)
 
 
+Started GET "/home/index" for 127.0.0.1 at 2017-06-06 02:08:30 -0500
+Processing by HomeController#index as HTML
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (6.9ms)
+Completed 200 OK in 106ms (Views: 96.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 127.0.0.1 at 2017-06-06 02:08:32 -0500
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (16.3ms)
+Completed 200 OK in 69ms (Views: 66.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/sessions/new" for 127.0.0.1 at 2017-06-06 02:08:33 -0500
+Processing by SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/new.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 52ms (Views: 42.7ms | ActiveRecord: 0.0ms)
+
+
