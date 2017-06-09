@@ -1,6 +1,20 @@
 class LeadsController < ApplicationController
   def index
-    @leads = Lead.all 
+    @leads = Lead.all
+    
+    if params[:search]
+      if params[:search] == ""
+          return @errors = "Please input a search!"
+        end
+        if params[:category] == "Center Code"
+       return @leads = Lead.search(params[:search].to_i, params[:category]).order("created_at DESC")
+      end
+        
+      @leads = Lead.search(params[:search], params[:category]).order("created_at DESC")
+      
+    else
+      @leads = Lead.all.order('created_at DESC')
+    end
   end
 
   def new

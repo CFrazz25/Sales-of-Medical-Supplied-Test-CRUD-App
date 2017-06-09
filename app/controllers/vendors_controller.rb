@@ -1,6 +1,19 @@
 class VendorsController < ApplicationController
   def index
-    @vendors = User.all.select {|user| user.admin == false}
+    @vendors = Vendor.all.select {|user| user.admin == false}
+    p params[:search]
+    if params[:search]
+        if params[:search] == ""
+          return @errors = "Please input a search!"
+        end
+        if params[:category] == "Center Code"
+       return @vendors = Vendor.search(params[:search].to_i, params[:category]).order("created_at DESC").select {|user| user.admin == false}
+      end
+      @vendors = Vendor.search(params[:search], params[:category]).order("created_at DESC").select {|user| user.admin == false}
+      
+    else
+      @vendors = Vendor.all.select {|user| user.admin == false}
+    end
   end
 
   def new

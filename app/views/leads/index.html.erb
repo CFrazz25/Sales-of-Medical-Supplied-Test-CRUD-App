@@ -1,32 +1,74 @@
-<div style="padding-top: 70px;">
-<% if logged_in? && current_admin.admin == true %>
-<% @leads.each do |lead| %>
-<ul>
-  <li>First Name: <%= lead.first_name %></li>
-  <li>Last Name: <%= lead.last_name %></li>
-  <li>Phone Number: <%= lead.phone_number %></li>
-  <li>Disposition: <%= lead.disposition %></li>
-  <li>Status: <%= lead.status %></li>
-  <li>Center Code: <%= lead.center_code %></li>
-  <li ><%= link_to "edit lead", edit_lead_path(lead.id), class: "btn-success btn-sm" %></li><br>
-  </ul>
+<div style="padding-top: 100px;">
+
+<%= form_tag(leads_path, :method => "get", id: "search-form") do %>
+<%= select_tag 'category', options_for_select(['First Name','Last Name','Phone Number','Disposition', 'Status', 'Center Code'],'First Name') %>
+ 
+  <%= text_field_tag :search, params[:search], placeholder: "Search Leads" %>
+  <%= submit_tag "Search" %><em>** Note: Search is case sensitive. ** </em>
 <% end %>
+</div>
+<div style="padding-top: 70px;">
+
+
+
+<% if logged_in? && current_admin.admin == true %>
+<h2><%= @errors %></h2>
+<h2># of results: <%= @leads.count %></h2>
+<table>
+  <tr>
+  <th>First Name</th>
+  <th>Last Name</th>
+  <th>Phone Number</th>
+  <th>Disposition</th>
+  <th>Status</th>
+  <th>Center Code</th>
+</tr>
+<% @leads.each do |lead| %>
+
+   <tr>
+   <th><%= lead.first_name %></th>
+   <th><%= lead.last_name %></th>
+   <th><%= lead.phone_number %></th>
+   <th><%= lead.disposition %></th>
+   <th><%= lead.status %></th>
+   <th><%= lead.center_code %></th>
+   <th><%= link_to "edit lead", edit_lead_path(lead.id), class: "btn-success btn-sm" %></th>
+   </tr>
+  
+  
+<% end %>
+</table>
 <% end %>
 
+
 <% if logged_in? && current_vendor.admin == false %>
+<h2><%= @errors %></h2>
+<h2># of results: <%= @leads.select{|lead| lead.center_code == current_vendor.center_code}.count %></h2>
+
+
+  <table>
+  <tr>
+  <th>First Name</th>
+  <th>Last Name</th>
+  <th>Phone Number</th>
+  <th>Disposition</th>
+  <th>Status</th>
+  <th>Center Code</th>
+</tr>
 <% @leads.each do |lead| %>
   <% if current_vendor.center_code == lead.center_code %>
-  <ul>
-  <li>First Name: <%= lead.first_name %></li>
-  <li>Last Name: <%= lead.last_name %></li>
-  <li>Phone Number: <%= lead.phone_number %></li>
-  <li>Disposition: <%= lead.disposition %></li>
-  <li>Status: <%= lead.status %></li>
-  <li>Center Code: <%= lead.center_code %></li>
-  </ul>
+<tr>
+   <th><%= lead.first_name %></th>
+   <th><%= lead.last_name %></th>
+   <th><%= lead.phone_number %></th>
+   <th><%= lead.disposition %></th>
+   <th><%= lead.status %></th>
+   <th><%= lead.center_code %></th>
+   </tr>
+  
   <% end %>
  
 <% end %>
-
+</table>
 <% end %>
 </div>

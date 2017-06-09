@@ -1,15 +1,38 @@
+<div style="padding-top: 100px;">
+
+<%= form_tag(vendors_path, :method => "get", id: "search-form") do %>
+<%= select_tag 'category', options_for_select(['First Name','Last Name','Email', 'Center Code'],'First Name') %>
+ 
+  <%= text_field_tag :search, params[:search], placeholder: "Search Vendors" %>
+  <%= submit_tag "Search" %><em>** Note: Search is case sensitive. ** </em>
+<% end %>
+</div>
+
+
+
 <div style="padding-top: 70px;">
 <% if logged_in? && current_admin.admin == true %>
+<h2><%= @errors %></h2>
+<h2># of results: <%= @vendors.count %></h2>
 <h2>View Vendors! </h2>
+<table>
+  <tr>
+  <th>First Name</th>
+  <th>Last Name</th>
+  <th>Phone Number</th>
+  <th>Center Code</th>
+</tr>
 <% @vendors.each do |vendor| %>
-<ul>
-  <li>First Name: <%= vendor.first_name %></li>
-  <li>Last Name: <%= vendor.last_name %></li>
-  <li>Email: <%= vendor.email %></li>
-  <li>Center Code: <%= vendor.center_code %></li>
-  <li ><%= link_to "edit vendor", edit_vendor_path(vendor.id), class: "btn-success btn-sm" %></li><br>
-  </ul>
+<tr>
+   <th><%= vendor.first_name %></th>
+   <th><%= vendor.last_name %></th>
+   <th><%= vendor.email %></th>
+   <th><%= vendor.center_code %></th>
+  <th><%= link_to "edit vendor", edit_vendor_path(vendor.id), class: "btn-success btn-sm" %></th>
+  </tr>
+  
 <% end %>
+</table>
 <% else %>
 <h1> You don't have access to this page! </h1>
 <% end %>

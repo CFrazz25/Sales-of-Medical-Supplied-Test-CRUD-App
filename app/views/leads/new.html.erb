@@ -16,12 +16,13 @@
     <%= f.text_field :last_name, autofocus: true %><br />
   
     <%= f.text_field :phone_number, autofocus: true %><br />
- 
-    <%= f.select(:disposition, [['New Lead'], ['Recording Pending'], ['Bad State'], ['Doctor Approval Pending'], ['Script Received Signed'], ['Dr Denied'], ['Transferred to DR - Success'], ['Transferred to DR - Missing Information'], ['QA Approved'], ['QA Rejected']]) %><br />
- 
-    <%= f.select(:status, [['Inactive'], ['Activate'], ['Problem'], ['Reject']]) %><br />
 
-    <%= f.number_field :center_code, autofocus: true %><br />
+    <%= f.hidden_field(:disposition, {value: 'New Lead'}) %><br>
+
+    <%= f.hidden_field(:status, {value: 'Inactive'}) %><br>
+
+
+    <%= f.number_field :center_code, value: current_vendor.center_code %><br />
   
   <%= f.submit "Create New Lead" %>
 <% end %>
